@@ -1,0 +1,47 @@
+{
+    "Guest":{
+        "denied": {},
+        "Home": ["*"],
+        "Register": ["login", "register"],
+        "Restricted": ["*"],
+        "Invoicing": ["*"]
+
+    },
+    "Client":{
+        "denied": {
+            "Register": ["login", "register"]
+        },
+        "Register": ["logout"],
+        "Calendar": ["*"],
+        "Contacts": ["*"],
+        "Books": ["*"],
+        
+        "Invoicing": ["*"]
+
+
+    },
+    "Admin":{
+        "denied": {
+            "Register": ["login", "register"]
+        },
+        "Admin": ["*"],
+        "Register": ["logout"],
+        "Calendar": ["*"],
+        "Contacts": ["*"],
+        "Books": ["*"],
+        "Invoicing": ["*"],
+        "All_users": ["*"]
+    },
+    "Super_admin":{
+        "denied": {
+            "Register": ["login", "register"]
+        },
+        "Admin": ["*"],
+        "Register": ["logout"],
+        "Calendar": ["*"],
+        "Contacts": ["*"],
+        "Books": ["*"],
+        "Invoicing": ["*"]
+        
+    }
+}

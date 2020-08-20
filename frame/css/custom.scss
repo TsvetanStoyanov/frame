@@ -1,0 +1,37 @@
+@import "./_variables";
+
+.red {
+  color: $red;
+}
+
+body {
+  background: $body_color;
+}
+
+.form-errors {
+  border-radius: 8px;
+  margin: 10px 25px 45px 25px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+.form-errors li {
+  list-style: none;
+  font-size: 16px;
+}
+
+.book {
+  border: $solid_border;
+  height: 20%;
+}
+
+.book_img {
+  height: 100px;
+  width: 100px;
+}
+
+.page_title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
