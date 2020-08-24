@@ -83,7 +83,7 @@ use Core\H;
     if (strpos($link, $find)) {
     ?>
         <script>
-            $.widget.bridge('uibutton', $.ui.button);
+            // $.widget.bridge('uibutton', $.ui.button);
         </script>
         <script src="<?php echo PROOT ?>js/bootstrap_3.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>

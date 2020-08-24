@@ -8,6 +8,8 @@ use Core\Controller;
 use Core\Session;
 use Core\Router;
 use App\Models\Users;
+use Core\H;
+use Core\FH;
 
 class AdminController extends Controller
 {
@@ -55,18 +57,30 @@ class AdminController extends Controller
             Router::redirect('admin');
         }
 
-
         if ($this->request->isPost()) {
             // $this->request->csrfCheck();
             $admin->assign($this->request->get());
-            if ($admin->save()) {
-                // Router::redirect('admin/edit/18');
+
+            // get image upload from core helper
+            if (isset($_POST["submit"])) {
+                $target_dir  = '/var/www/html/frame/images/admin/';
+                if (H::image($target_dir) == 1) {
+
+                    $modal = FH::modal('danger', 'This image is too large', 'This is not saved');
+                    // return in view side
+                    $this->view->modal = $modal;
+                } else {
+                    $modal = FH::modal('success', 'Saved', 'done');
+                    $this->view->modal = $modal;
+
+                    $admin->save();
+                }
             }
         }
 
-
         $this->view->displayErrors = $admin->get_error_messages();
         $this->view->admin = $admin;
+
         $this->view->postAction = PROOT . 'admin' . DS . 'edit' . DS . $admin->id;
         $this->view->render('admin/edit');
     }

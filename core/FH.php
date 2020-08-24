@@ -38,6 +38,15 @@ class FH
     }
 
 
+    public static function modal($type, $title = '', $text)
+    {
+        $html =  '<div class="callout callout-' . $type . '">';
+        $html .= '<h4>' . $title . '</h4>';
+        $html .=    '<p>' . $text . '</p>';
+        $html .= '</div>';
+        return $html;
+    }
+
 
 
 

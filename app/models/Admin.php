@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use Core\Model;
-use Core\Validators\RequiredValidator;
-use Core\Validators\MaxValidator;
-
+use Core\FH;
 class Admin extends Model
 {
     public $id, $username, $fname, $lname, $email, $acl, $img;
     public $deleted = 0;
 
+    
     public function __construct()
     {
         // table of Database

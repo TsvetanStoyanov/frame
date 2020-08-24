@@ -1,49 +1,29 @@
 <?php
 
+use Core\H;
 use Core\FH;
 use App\Models\Users;
 
-
-
-?>
-
-<?php
-
-if (isset($_POST["submit"])) {
-
-    $target_dir  = '/var/www/html/frame/images/admin/';
-
-    $target_file = $target_dir . ($_FILES["fileToUpload"]["name"]);
-    // var_dump($target_file);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    // Check if image file is a actual image or fake image
-    if (isset($_POST["submit"])) {
-        $check = @getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        // var_dump($_FILES["fileToUpload"]);
-    }
-    // Allow certain file formats
-    if (
-        $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif"
-    ) {
-        // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-    }
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        // echo "Sorry, your file was not uploaded.";
-    } else {
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            // echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
-        } else {
-            // echo "Sorry, there was an error uploading your file.";
-        }
-    }
+// show error
+if (isset($this->modal)) {
+    echo $this->modal;
 }
 
 ?>
+<script>
+    // load new image onchange before save
+    function displayImage(e) {
+        if (e.files[0]) {
+            var reader = new FileReader();
 
+            reader.onload = function(e) {
+                document.querySelector("#test").setAttribute('src', e.target.result);
+
+            }
+            reader.readAsDataURL(e.files[0]);
+        }
+    }
+</script>
 
 <form class="form" action="<?= $this->postAction ?>" method="post" enctype="multipart/form-data">
 
@@ -64,13 +44,26 @@ if (isset($_POST["submit"])) {
         <?= FH::input_block('text', 'img', 'img', $this->admin->img, ['class' => 'form-control bind d-none'], ['class' => 'form-group col-md-6 d-none hide']) ?>
 
 
-        Select image to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload" class="fileToUpload">
-
-        <img style="width: 100px;" src="<?= PROOT . 'images/admin' . DS . $this->admin->img ?>" alt="<?= $this->admin->fname ?> ">
 
 
-        
+        <div class="form-group">
+            <div class="btn btn-default btn-file">
+                <i class="fa fa-paperclip"></i> Attachment
+                <input type="file" name="fileToUpload" id="fileToUpload" class="fileToUpload" onchange="displayImage(this)">
+            </div>
+
+            <?php
+
+            if ($this->admin->img) {
+
+            ?>
+                <img id="test" style="width: 100px;" src="<?= PROOT . 'images/admin' . DS . $this->admin->img ?>" alt="<?= $this->admin->fname ?>" onchange="displayImage(this)">
+            <?php } else {
+            ?>
+        </div>
+        <img style="width: 100px;" src="<?= PROOT . 'images/admin/person.png' ?>" alt="person">
+
+    <?php } ?>
 
     </div>
 
@@ -80,10 +73,8 @@ if (isset($_POST["submit"])) {
 
         <input type="submit" value="Save" class="btn btn-success" name="submit">
 
-
     </div>
 </form>
-
 
 <script>
     $('.fileToUpload').change(function() {
@@ -93,6 +84,5 @@ if (isset($_POST["submit"])) {
         //   remove fakepath from upload
         var cleaned = a.replace('C:\\fakepath\\', '');
         $a = $(".bind").val(cleaned);
-
     });
 </script>
