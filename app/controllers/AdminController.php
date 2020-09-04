@@ -3,9 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Admin;
-use App\Models\Books;
 use Core\Controller;
-use Core\Session;
 use Core\Router;
 use App\Models\Users;
 use Core\H;
@@ -51,11 +49,12 @@ class AdminController extends Controller
         $admin = $AdminModel->find_by_id_and_user_id((int)$id, Users::current_user()->id);
 
 
+
         // Only super admins have full permissions 
         if (Users::current_user()->acl != 'Super_admin' && Users::current_user()->id != (int)$id) {
-
             Router::redirect('admin');
         }
+
 
         if ($this->request->isPost()) {
             // $this->request->csrfCheck();
@@ -76,9 +75,15 @@ class AdminController extends Controller
                     $admin->save();
                 }
             }
-        }
 
+            // $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+
+        }
+        
         $this->view->displayErrors = $admin->get_error_messages();
+        $this->view->admin = $admin;
+        
+        
         $this->view->admin = $admin;
 
         $this->view->postAction = PROOT . 'admin' . DS . 'edit' . DS . $admin->id;

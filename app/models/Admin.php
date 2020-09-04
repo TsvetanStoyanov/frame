@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Core\Model;
 use Core\FH;
+
 class Admin extends Model
 {
-    public $id, $username, $fname, $lname, $email, $acl, $img;
+    public $id, $username, $fname, $lname, $email, $acl, $img, $password, $old;
     public $deleted = 0;
 
-    
+
     public function __construct()
     {
         // table of Database
@@ -76,5 +77,13 @@ class Admin extends Model
         ];
         $conditions = array_merge($conditions, $params);
         return $this->find_first($conditions);
+    }
+
+    // get from current input and encrypt before save
+    public function before_save()
+    {
+        if ($this->old != $this->password) {
+            $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        }
     }
 }

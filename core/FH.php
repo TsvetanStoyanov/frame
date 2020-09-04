@@ -6,7 +6,6 @@ use Core\Session;
 
 class FH
 {
-
     public static function input_block($type, $label, $name, $value = '', $input_attr = [], $div_attr = [], $required = '')
     {
         $div_string = self::stringify_attr($div_attr);
@@ -20,12 +19,6 @@ class FH
         return $html;
     }
 
-    //     <div class="btn btn-default btn-file">
-    //     <i class="fa fa-paperclip"></i> Attachment
-    //     <input type="file" name="attachment">
-    // </div>
-
-
     public static function attach($label, $value = '')
     {
 
@@ -37,18 +30,15 @@ class FH
         return $html;
     }
 
-
     public static function modal($type, $title = '', $text)
     {
-        $html =  '<div class="callout callout-' . $type . '">';
+        $html =  '<div class="alert alert-' . $type . ' alert-dismissable">';
+        $html .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
         $html .= '<h4>' . $title . '</h4>';
         $html .=    '<p>' . $text . '</p>';
         $html .= '</div>';
         return $html;
     }
-
-
-
 
     public static function textarea($label, $name, $value = '', $input_attr = [], $div_attr = [], $required = '')
     {

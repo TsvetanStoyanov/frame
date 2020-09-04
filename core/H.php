@@ -24,6 +24,8 @@ class H
         if ($current_page == PROOT || $current_page == PROOT . '/home/index') {
             $current_page = PROOT . 'home';
         }
+
+
         return $current_page;
     }
 
@@ -65,7 +67,10 @@ class H
             $check = @getimagesize($_FILES["fileToUpload"]["tmp_name"]);
             // var_dump($_FILES["fileToUpload"]);
         }
-        if ($_FILES["fileToUpload"]["size"] > 500000) {
+        // var_dump($_FILES["fileToUpload"]["size"]);
+        // exit;
+        if ($_FILES["fileToUpload"]["size"] > 5000000) {
+            var_dump($_FILES["fileToUpload"]["size"]);
             $uploadOk = 0;
             //Sorry, your file is too large.
             $result = 1;

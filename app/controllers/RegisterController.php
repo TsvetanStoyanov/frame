@@ -64,8 +64,8 @@ class RegisterController extends Controller
 
         if ($this->request->isPost()) {
             $this->request->csrfCheck();
-            var_dump($this->request->get());
             $newUser->assign($this->request->get());
+            var_dump($newUser);
 
             $newUser->set_confirm($this->request->get('confirm'));
 

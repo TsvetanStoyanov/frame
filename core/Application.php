@@ -37,4 +37,16 @@ class Application
             }
         }
     }
+
+    public static function d($data, $stop = 0)
+    {
+        echo '<pre style="border: 1px solid black">';
+        if ($stop == 1) {
+            var_dump($data);
+            exit;
+        } else {
+            var_dump($data);
+        }
+        echo '</pre>';
+    }
 }

@@ -22,6 +22,7 @@ class InvoicingController extends Controller
     public function indexAction()
     {
 
+        // Get from Query 
         $db = DB::getInstance();
 
         $sql = "SELECT * from `books`";
@@ -29,6 +30,13 @@ class InvoicingController extends Controller
         $favouriteQ = $db->query($sql)->results();
 
         $this->view->invoicing = $favouriteQ;
+
+
+        // Get from model
+        $InvoicingModel = new Invoicing();
+        $books = $InvoicingModel->find_all_books();
+        $this->view->books = $books;
+
         $this->view->render('invoicing/index');
     }
 }

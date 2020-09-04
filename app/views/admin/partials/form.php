@@ -29,41 +29,40 @@ if (isset($this->modal)) {
 
 
     <?= FH::displayErrors($this->displayErrors) ?>
-    <div class="form-row">
-        <!-- <?= FH::csrf_input() ?> -->
+
+    <!-- <?= FH::csrf_input() ?> -->
+    <div class="col-md-4">
+        <?= FH::input_block('text', 'img', 'img', $this->admin->img, ['class' => 'form-control bind d-none'], ['class' => 'form-group col-md-6 d-none hide']) ?>
+        <div class="btn btn-default btn-file">
+            <i class="fa fa-pencil"></i> Change image
+            <input type="file" name="fileToUpload" id="fileToUpload" class="fileToUpload" onchange="displayImage(this)">
+        </div>
+
+        <?php
+
+        if ($this->admin->img) {
+
+        ?>
+            <img id="test" style="width: 30%;" src="<?= PROOT . 'images/admin' . DS . $this->admin->img ?>" alt="<?= $this->admin->fname ?>" onchange="displayImage(this)">
+        <?php } else {
+        ?>
+
+            <img style="width: 30%;" src="<?= PROOT . 'images/admin/person.png' ?>" alt="person">
+
+        <?php } ?>
+
+    </div>
+
+    <div class="col-md-8">
+
         <?= FH::input_block('text', 'First Name', 'fname', $this->admin->fname, ['class' => 'form-control'], ['class' => 'form-group col-md-6']) ?>
         <?= FH::input_block('text', 'Last Name', 'lname', $this->admin->lname, ['class' => 'form-control'], ['class' => 'form-group col-md-6']) ?>
         <?= FH::input_block('text', 'Email', 'email', $this->admin->email, ['class' => 'form-control'], ['class' => 'form-group col-md-6']) ?>
-        <!-- <?= FH::input_block('text', 'Password', 'password', $this->admin->password, ['class' => 'form-control'], ['class' => 'form-group col-md-6']) ?> -->
-
-        <?= (Users::current_user()->acl == "Admin" || Users::current_user()->acl == "Super_admin") ? FH::input_dropdown('Role', 'acl', $this->admin->acl, ['Super_admin' => 'Super_admin', 'Admin' => 'Admin', 'Client' => 'Client'], 'form-group col-md-4') : ''; ?>
-
-
+        <?= FH::input_block('text', 'Old', 'old',  $this->admin->password, ['class' => 'form-control'], ['class' => 'form-group col-md-6 hide']); ?>
+        <?= (Users::current_user()->acl == "Admin" || Users::current_user()->acl == "Super_admin") ? FH::input_dropdown('Role', 'acl', $this->admin->acl, ['Super_admin' => 'Super_admin', 'Admin' => 'Admin', 'Client' => 'Client'], 'form-group col-md-2') : ''; ?>
         <?= (Users::current_user()->acl == "Admin" || Users::current_user()->acl == "Super_admin") ? FH::input_dropdown('Verified', 'deleted', $this->admin->deleted, ['0' => 'Yes', '1' => 'No'], 'form-group col-md-2') : '' ?>
-
-        <?= FH::input_block('text', 'img', 'img', $this->admin->img, ['class' => 'form-control bind d-none'], ['class' => 'form-group col-md-6 d-none hide']) ?>
-
-
-
-
-        <div class="form-group">
-            <div class="btn btn-default btn-file">
-                <i class="fa fa-paperclip"></i> Attachment
-                <input type="file" name="fileToUpload" id="fileToUpload" class="fileToUpload" onchange="displayImage(this)">
-            </div>
-
-            <?php
-
-            if ($this->admin->img) {
-
-            ?>
-                <img id="test" style="width: 100px;" src="<?= PROOT . 'images/admin' . DS . $this->admin->img ?>" alt="<?= $this->admin->fname ?>" onchange="displayImage(this)">
-            <?php } else {
-            ?>
-        </div>
-        <img style="width: 100px;" src="<?= PROOT . 'images/admin/person.png' ?>" alt="person">
-
-    <?php } ?>
+        <p id="button" class=" btn btn-primary" onclick="return false">Change password</p>
+        <?= FH::input_block('text', 'Password', 'password',  $this->admin->password, ['class' => 'form-control'], ['class' => 'form-group col-md-6 password hide']); ?>
 
     </div>
 
@@ -84,5 +83,11 @@ if (isset($this->modal)) {
         //   remove fakepath from upload
         var cleaned = a.replace('C:\\fakepath\\', '');
         $a = $(".bind").val(cleaned);
+    });
+
+    // show password input
+    $('#button').click(function() {
+        $('.password').removeClass('hide');
+        $('#password').val('');
     });
 </script>
