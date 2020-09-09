@@ -4,14 +4,14 @@ namespace App\Controllers;
 
 
 use App\Models\Home;
-use App\Models\Invoicing;
+use App\Models\Weather;
 use Core\Controller;
 use Core\Router;
 
 use App\Models\Users;
 use Core\DB;
 
-class InvoicingController extends Controller
+class WeatherController extends Controller
 {
     public function __construct($controller, $action)
     {
@@ -29,14 +29,14 @@ class InvoicingController extends Controller
 
         $favouriteQ = $db->query($sql)->results();
 
-        $this->view->invoicing = $favouriteQ;
+        $this->view->weather = $favouriteQ;
 
 
         // Get from model
-        $InvoicingModel = new Invoicing();
-        $books = $InvoicingModel->find_all_books();
+        $weatherModel = new Weather();
+        $books = $weatherModel->find_all_books();
         $this->view->books = $books;
 
-        $this->view->render('invoicing/index');
+        $this->view->render('weather/index');
     }
 }

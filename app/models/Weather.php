@@ -6,11 +6,10 @@ use Core\DB;
 
 use Core\Model;
 
-class Invoicing extends Model
+class Weather extends Model
 {
 
     public $id, $user_id, $name, $isbn, $description, $image;
-    // public $id, $username, $fname, $lname, $email, $acl, $img, $password, $old;
 
 
     public function __construct()

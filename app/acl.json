@@ -4,7 +4,7 @@
         "Home": ["*"],
         "Register": ["login", "register"],
         "Restricted": ["*"],
-        "Invoicing": ["*"]
+        "Weather": ["*"]
 
     },
     "Client":{
@@ -16,7 +16,7 @@
         "Contacts": ["*"],
         "Books": ["*"],
         
-        "Invoicing": ["*"]
+        "Weather": ["*"]
 
 
     },
@@ -29,7 +29,7 @@
         "Calendar": ["*"],
         "Contacts": ["*"],
         "Books": ["*"],
-        "Invoicing": ["*"],
+        "Weather": ["*"],
         "All_users": ["*"]
     },
     "Super_admin":{
@@ -41,7 +41,7 @@
         "Calendar": ["*"],
         "Contacts": ["*"],
         "Books": ["*"],
-        "Invoicing": ["*"]
+        "Weather": ["*"]
         
     }
 }

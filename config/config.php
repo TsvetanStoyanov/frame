@@ -22,6 +22,7 @@ define('MENU_BRAND', 'FRAME'); //this is the nramd text in the menu
 
 
 define('CURRENT_USER_SESSION_NAME', 'BikErCeCi'); //session name for logged in user
+define('LAT', '23.651'); //session name for logged in user
 
 define('REMEMBER_ME_COOKIE_NAME', 'SDFSADSA546ASDsad4'); //cookie name for  in logged user remember me
 

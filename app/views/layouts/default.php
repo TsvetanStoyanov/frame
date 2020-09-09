@@ -63,7 +63,7 @@ use Core\H;
 
 </head>
 
-<body>
+<body onload="getLocation()">
 
     <?php
     (!strpos($link, $find)) ? include 'main_menu.php' : include 'admin_menu.php';
